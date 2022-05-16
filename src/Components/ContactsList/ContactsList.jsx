@@ -1,23 +1,28 @@
-import { useSelector } from 'react-redux';
+// import { useSelector } from 'react-redux';
 import s from './ContactsList.module.css';
 import Contact from './Contact';
+import { useGetContactQuery } from '../../redux/ContactsApi';
 
 function ContactsList() {
-  const contacts = useSelector(state => state.contacts);
-  const filter = useSelector(state => state.filter);
+  const { data, error, isLoading } = useGetContactQuery();
+  console.log(data);
+  // const filter = useSelector(state => state.filter);
 
-  const list = () => {
-    return contacts.filter(contact =>
-      contact.name.toLowerCase().includes(filter)
-    );
-  };
+  // const list = () => {
+  //   return (
+  //     data &&
+  //     data.filter(contact => contact.name.toLowerCase().includes(filter))
+  //   );
+  // };
 
   return (
-    <ul className={s.ContactList}>
-      {list().map(({ name, number, id }, idx) => (
-        <Contact key={id} idx={idx} name={name} number={number} id={id} />
-      ))}
-    </ul>
+    data && (
+      <ul className={s.ContactList}>
+        {data.map(({ name, phone, id }, idx) => (
+          <Contact key={id} idx={idx} name={name} number={phone} id={id} />
+        ))}
+      </ul>
+    )
   );
 }
 
