@@ -3,7 +3,7 @@ import s from './App.module.css';
 
 import ContactForm from './Components/ContactForm';
 import Filter from './Components/Filter';
-import ContactsList from './Components/ContactsList';
+import Contacts from './Components/Contacts';
 import Container from './Components/Container';
 
 function App() {
@@ -14,7 +14,7 @@ function App() {
         <ContactForm />
         <h2>Contacts</h2>
         <Filter />
-        <ContactsList />
+        <Contacts />
       </Container>
     </div>
   );

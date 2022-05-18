@@ -1,5 +1,4 @@
 import { configureStore } from '@reduxjs/toolkit';
-// import { ContactsSlice } from './ContactsSlice';
 import { setupListeners } from '@reduxjs/toolkit/query';
 import { FilterSlice } from './FilterSlice';
 import { ContactsApi } from './ContactsApi';
@@ -20,11 +19,6 @@ const persistConfig = {
   storage,
 };
 
-// const rootReducer = {
-//   contacts: ContactsSlice.reducer,
-//   filter: FilterSlice.reducer,
-// };
-
 const persistedReducer = persistReducer(persistConfig, FilterSlice.reducer);
 
 export const store = configureStore({
@@ -40,13 +34,8 @@ export const store = configureStore({
     }),
     ContactsApi.middleware,
   ],
-
-  //     getDefaultMiddleware({
-  //       serializableCheck: {
-  //         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
-  //       },
-  //     }).concat(ContactsApi.middleware),
 });
 
 export const persistor = persistStore(store);
+
 setupListeners(store.dispatch);

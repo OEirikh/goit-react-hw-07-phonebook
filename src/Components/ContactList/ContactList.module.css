@@ -7,3 +7,9 @@
   border-radius: 5px;
   background-color: rgb(171, 216, 218);
 }
+
+.Contact {
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+}

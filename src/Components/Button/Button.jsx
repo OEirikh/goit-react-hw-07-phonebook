@@ -1,9 +1,9 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React from 'react';
+import PropTypes from 'prop-types';
 
-function Button({ type, text, onClick, disabled }) {
+function Button({ type, text, onDelete, disabled, id }) {
   return (
-    <button type={type} onClick={onClick} disabled={disabled}>
+    <button type={type} onClick={() => onDelete(id)} disabled={disabled}>
       {text}
     </button>
   );
