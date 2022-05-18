@@ -1,18 +1,23 @@
 import PropTypes from 'prop-types';
 import s from './ContactList.module.css';
-import Button from '../Button';
 
-function ContactList({ data, onDelete }) {
+function ContactList({ data, onDelete, isDeleting }) {
   return (
     data && (
-      <ul className={s.ContactList}>
+      <ul className={s.contactList}>
         {data.map(({ name, phone, id }) => (
-          <li className={s.Contact} key={id}>
+          <li className={s.contact} key={id}>
             <p>
-              {name}: {phone} : {id}
+              {name}: {phone}
             </p>
-
-            <Button onDelete={onDelete} id={id} text="Delete" type="button" />
+            <button
+              className={s.button}
+              type="button"
+              onClick={() => onDelete(id)}
+              disabled={isDeleting}
+            >
+              {isDeleting ? 'Delete...' : 'Delete'}
+            </button>
           </li>
         ))}
       </ul>
@@ -23,9 +28,7 @@ function ContactList({ data, onDelete }) {
 export default ContactList;
 
 ContactList.propTypes = {
-  options: PropTypes.shape({
-    name: PropTypes.string.isRequired,
-    number: PropTypes.number.isRequired,
-    idx: PropTypes.number.isRequired,
-  }),
+  data: PropTypes.array.isRequired,
+  onDelete: PropTypes.func.isRequired,
+  isDeleting: PropTypes.bool.isRequired,
 };

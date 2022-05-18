@@ -5,13 +5,19 @@ import {
 } from '../../redux/ContactsApi';
 
 function Contacts() {
-  const { data, isFetching } = useGetContactQuery();
-  const [deleteContacts] = useDeleteContactsMutation();
+  const { data } = useGetContactQuery();
+  const [deleteContacts, { isLoading: isDeleting }] =
+    useDeleteContactsMutation();
 
   return (
     <>
-      {isFetching && '...Loading'}
-      {data && <ContactList data={data} onDelete={deleteContacts} />}
+      {data && (
+        <ContactList
+          data={data}
+          onDelete={deleteContacts}
+          isDeleting={isDeleting}
+        />
+      )}
     </>
   );
 }

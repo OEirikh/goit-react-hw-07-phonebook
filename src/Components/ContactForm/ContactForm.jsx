@@ -1,11 +1,9 @@
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { addContact } from '../../redux/ContactsSlice';
-import Button from '../Button';
+import { useAddContactsMutation } from '../../redux/ContactsApi';
 import s from './ContactForm.module.css';
 
 function ContactForm() {
-  const dispatch = useDispatch();
+  const [addContacts, { isLoading }] = useAddContactsMutation();
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
 
@@ -22,15 +20,18 @@ function ContactForm() {
     }
   };
 
-  const onFormSubmit = e => {
+  const handleSubmit = e => {
     e.preventDefault();
-    dispatch(addContact({ name, number }));
+    addContacts({
+      name: name,
+      phone: number,
+    });
     setName('');
     setNumber('');
   };
 
   return (
-    <form onSubmit={onFormSubmit}>
+    <form autoComplete="off" onSubmit={handleSubmit}>
       <label className={s.form}>
         <p>Name</p>
         <input
@@ -54,11 +55,13 @@ function ContactForm() {
           required
           className={s.input}
         />
-        <Button
-          text="Add Contact"
+        <button
+          className={s.button}
           type="submit"
           disabled={number && name ? false : true}
-        />
+        >
+          {isLoading ? 'Add Contact...Spiner' : 'Add Contact'}
+        </button>
       </label>
     </form>
   );

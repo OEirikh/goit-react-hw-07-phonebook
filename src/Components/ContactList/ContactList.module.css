@@ -1,15 +1,26 @@
-.ContactList {
+.contactList {
   display: flex;
   flex-direction: column;
+  align-items: stretch;
   width: 400px;
-  padding: 20px;
+  padding: 7px;
   border: 1px solid blakc;
   border-radius: 5px;
   background-color: rgb(171, 216, 218);
 }
 
-.Contact {
+.contact {
+  padding: 7px;
   list-style: none;
   display: flex;
   justify-content: space-between;
+}
+
+.button {
+  margin: auto 0;
+  height: 30px;
+  border-radius: 8px;
+  border-style: none;
+  background-color: rgb(237, 230, 222);
+  font-weight: 700;
 }
