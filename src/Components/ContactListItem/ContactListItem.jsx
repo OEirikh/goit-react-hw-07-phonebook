@@ -25,8 +25,8 @@ function ContactListItem({ name, phone, id }) {
 
 ContactListItem.propTypes = {
   name: PropTypes.string.isRequired,
-  phone: PropTypes.number.isRequired,
-  id: PropTypes.number.isRequired,
+  phone: PropTypes.string.isRequired,
+  id: PropTypes.string.isRequired,
 };
 
 export default ContactListItem;

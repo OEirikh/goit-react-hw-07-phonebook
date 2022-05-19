@@ -2,7 +2,7 @@ html {
   box-sizing: border-box;
   width: 100vw;
   overflow-x: hidden;
-  background-color: rgb(194, 197, 197);
+  /* background-color: rgb(194, 197, 197); */
 }
 
 *,
