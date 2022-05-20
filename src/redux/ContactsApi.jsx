@@ -38,4 +38,5 @@ export const {
   useGetContactQuery,
   useAddContactsMutation,
   useDeleteContactsMutation,
+  use,
 } = ContactsApi;

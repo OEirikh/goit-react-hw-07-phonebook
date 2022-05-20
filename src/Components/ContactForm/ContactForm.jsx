@@ -1,11 +1,26 @@
-import { useState } from 'react';
-import { useAddContactsMutation } from '../../redux/ContactsApi';
+import { useState, useEffect } from 'react';
+import {
+  useAddContactsMutation,
+  useGetContactQuery,
+} from '../../redux/ContactsApi';
+import { toast } from 'react-toastify';
 import s from './ContactForm.module.css';
 
 function ContactForm() {
-  const [addContacts, { isLoading }] = useAddContactsMutation();
+  const [addContacts, { isLoading, isSuccess, error }] =
+    useAddContactsMutation();
+  const { data } = useGetContactQuery();
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
+  const [nameForToast, setnameForToast] = useState('');
+
+  useEffect(() => {
+    isSuccess &&
+      toast.success(` ${nameForToast} added to contact book`, {
+        autoClose: 800,
+      });
+    error && toast.error('oops something went wrong');
+  }, [error, isSuccess, nameForToast]);
 
   const handleInputChange = ({ currentTarget: { name, value } }) => {
     switch (name) {
@@ -22,10 +37,15 @@ function ContactForm() {
 
   const handleSubmit = e => {
     e.preventDefault();
-    addContacts({
-      name: name,
-      phone: number,
-    });
+    setnameForToast(name);
+
+    data.every(item => item.name.toLowerCase() !== name.toLowerCase())
+      ? addContacts({
+          name: name,
+          phone: number,
+        })
+      : toast.error(`${name} is alredy in contacts!!!`);
+
     setName('');
     setNumber('');
   };

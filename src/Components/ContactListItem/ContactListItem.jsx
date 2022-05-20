@@ -1,11 +1,18 @@
-import React from 'react';
+import { useEffect } from 'react';
 import PropTypes from 'prop-types';
+import { toast } from 'react-toastify';
 import s from './ContactListItem.module.css';
 import { useDeleteContactsMutation } from '../../redux/ContactsApi';
 
 function ContactListItem({ name, phone, id }) {
-  const [deleteContacts, { isLoading: isDeleting }] =
+  const [deleteContacts, { isLoading: isDeleting, isSuccess, error }] =
     useDeleteContactsMutation();
+
+  useEffect(() => {
+    isSuccess && toast.info(` ${name} was removed from the phone book`);
+    error && toast.error('oops something went wrong');
+  }, [isSuccess, name, error]);
+
   return (
     <li className={s.contact} key={id}>
       <p>
